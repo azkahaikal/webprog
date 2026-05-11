@@ -127,21 +127,35 @@ export async function handleGoogleCallback() {
   const sb = getSupabase();
   if (!sb) return null;
 
-  // Check if there's a session (after OAuth redirect)
-  const { data: { session }, error } = await sb.auth.getSession();
+  // tunggu sebentar setelah redirect OAuth
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  // ambil session dari Supabase
+  const {
+    data: { session },
+    error
+  } = await sb.auth.getSession();
+
+  console.log('[google callback] SESSION:', session);
+  console.log('[google callback] ERROR:', error);
+
   if (error || !session) return null;
 
   const access_token = session.access_token;
 
-  // Exchange with our backend
+  // kirim token ke backend
   const data = await apiFetch('/api/auth/google', {
     method: 'POST',
     body: JSON.stringify({ access_token })
   });
 
+  // simpan login
   saveToken(data.token);
   saveUser(data.user);
   notifyListeners(data.user);
+
+  console.log('[google callback] LOGIN BERHASIL');
+
   return data.user;
 }
 
