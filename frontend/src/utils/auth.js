@@ -4,7 +4,7 @@
 
 const SUPABASE_URL = 'https://vbaqpreidaszlgeklmzq.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZiYXFwcmVpZGFzemxnZWtsbXpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNDgwMzYsImV4cCI6MjA5MjkyNDAzNn0.Xc5fAx3npuyS83A_YXF6OTytPgr6Ryd3bD_UX3SjT9s';
-const BACKEND_URL = 'http://localhost:3001';
+const BACKEND_URL = 'http://numtest-cpns-backend-production-b91d.up.railway.app';
 
 export { BACKEND_URL };
 
