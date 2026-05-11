@@ -25,7 +25,7 @@ for (const key of REQUIRED_ENV) {
 const app = express();
 const server = http.createServer(app);
 
-const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5500';
+const CLIENT_URL = process.env.CLIENT_URL;
 const ALLOWED_ORIGINS = [
   CLIENT_URL,
   'http://127.0.0.1:5500',
