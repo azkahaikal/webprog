@@ -3160,7 +3160,7 @@
         const { error } = await sb.auth.signInWithOAuth({
           provider: 'google',
           options: {
-            redirectTo: 'https://webprog-five.vercel.app/auth/callback'
+            redirectTo: window.location.origin
           }
         });
         if (error) throw error;
