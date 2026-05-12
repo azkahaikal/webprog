@@ -2235,6 +2235,226 @@
     .page {
       animation: pageIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    /* ══════════════════════════════════════════════════════════
+       HAMBURGER MENU & DRAWER
+    ══════════════════════════════════════════════════════════ */
+
+    /* Hamburger button - mobile only */
+    #ham-btn {
+      display: none;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    #ham-btn span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text2);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    #ham-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #ham-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    #ham-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Drawer backdrop */
+    #drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 998;
+      backdrop-filter: blur(2px);
+    }
+    #drawer-overlay.visible { display: block; }
+
+    /* Drawer panel */
+    #ham-drawer {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100dvh;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+    }
+    #ham-drawer.open { right: 0; }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .drawer-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .drawer-close {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text2);
+      transition: var(--transition);
+    }
+    .drawer-close:hover { background: var(--surface2); color: var(--red); }
+
+    .drawer-section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 16px 20px 8px;
+      flex-shrink: 0;
+    }
+    .drawer-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      cursor: pointer;
+      color: var(--text2);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+    .drawer-item:hover, .drawer-item.active {
+      background: rgba(99,102,241,0.08);
+      color: var(--accent);
+    }
+    .drawer-item .di-icon { font-size: 1.15rem; width: 24px; text-align: center; }
+    .drawer-divider { height: 1px; background: var(--border); margin: 8px 20px; }
+
+    .drawer-auth-guest {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .btn-drawer {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text1);
+    }
+    .btn-drawer.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border-color: transparent;
+    }
+    .btn-drawer:hover { opacity: 0.85; }
+    .btn-drawer-danger {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--red);
+      background: none;
+      color: var(--red);
+      transition: var(--transition);
+    }
+    .btn-drawer-danger:hover { background: rgba(239,68,68,0.08); }
+
+    .drawer-user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--surface);
+      margin: 12px 12px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .drawer-user-info .du-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .drawer-user-info .du-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .drawer-user-info .du-name { font-weight: 600; font-size: 0.9rem; color: var(--text1); }
+    .drawer-user-info .du-email { font-size: 0.75rem; color: var(--text3); }
+
+    .drawer-footer {
+      margin-top: auto;
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    /* Mobile overrides */
+    @media (max-width: 768px) {
+      #navbar { padding: 0 12px; gap: 4px; }
+      .nav-logo { font-size: 1.1rem; }
+      .nav-right { gap: 4px; margin-left: auto; }
+      .nav-icon-btn { width: 32px; height: 32px; font-size: 0.9rem; }
+      #ham-btn { display: flex; }
+      /* Hide desktop auth on mobile - it's in the drawer */
+      #nav-auth-guest { display: none !important; }
+      /* Hide nav-links on mobile (drawer handles navigation) */
+      .nav-links { display: none !important; }
+
+      /* Splash screen — teks di tengah */
+      .splash-title { text-align: center; width: 100%; }
+      .splash-subtitle { text-align: center; width: 100%; }
+
+      /* Loading screen — teks di tengah */
+      .loader-logo { text-align: center; width: 100%; }
+      .loader-text { text-align: center; width: 100%; }
+    }
   </style>
 </head>
 
@@ -2296,13 +2516,12 @@
     </ul>
 
     <div class="nav-right">
-      <!-- Theme toggle -->
+      <!-- Theme + Sound icons (desktop: before auth buttons) -->
       <button class="nav-icon-btn" id="theme-btn" onclick="handleThemeToggle()" title="Toggle tema">🌙</button>
-      <!-- Sound toggle -->
       <button class="nav-icon-btn" id="sound-btn" onclick="toggleSoundPanel()" title="Pengaturan suara">🔊</button>
 
-      <!-- Auth section -->
-      <div id="nav-auth-guest">
+      <!-- Auth section (desktop only) -->
+      <div id="nav-auth-guest" style="display:flex;align-items:center;gap:8px;">
         <button class="btn-login" onclick="openModal('login')">Masuk</button>
         <button class="btn-login primary" onclick="openModal('register')">Daftar</button>
       </div>
@@ -2331,6 +2550,11 @@
           </div>
         </div>
       </div>
+
+      <!-- Hamburger (mobile only) -->
+      <button id="ham-btn" onclick="toggleDrawer()" title="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -2443,7 +2667,7 @@
     <div class="page active" id="page-home">
       <div class="hero">
         <div class="hero-badge">🎯 Platform Simulasi CPNS #1</div>
-        <h1>Siapkan dirimu untuk <span class="highlight">CPNS 2025</span></h1>
+        <h1>Siapkan dirimu untuk <span class="highlight">CPNS 2026</span></h1>
         <p>Latih kemampuan numerik dengan soal adaptif, pantau perkembanganmu, dan bersaing langsung dengan peserta lain
           di seluruh Indonesia.</p>
         <div class="hero-cta">
@@ -3051,6 +3275,7 @@
         localStorage.setItem('authUser', JSON.stringify(user));
         document.getElementById('nav-auth-guest').style.display = 'none';
         document.getElementById('nav-auth-user').style.display = 'flex';
+        syncDrawerAuth(true, { username: currentUser?.username, fullName: currentUser?.fullName, email: currentUser?.email, avatarUrl: currentUser?.avatarUrl });
         // Avatar
         const initials = user.username ? user.username.slice(0, 2).toUpperCase() : '??';
         const avatarEl = document.getElementById('nav-avatar');
@@ -3065,6 +3290,7 @@
       } else {
         document.getElementById('nav-auth-guest').style.display = 'flex';
         document.getElementById('nav-auth-user').style.display = 'none';
+        syncDrawerAuth(false, null);
         document.getElementById('nav-avatar').textContent = '?';
         document.getElementById('nav-username').textContent = 'User';
       }
@@ -3267,6 +3493,7 @@
       document.querySelectorAll('.nav-links a').forEach(a => {
         a.classList.toggle('active', a.dataset.page === name);
       });
+      syncDrawerPage(name);
       _currentPage = name;
 
       // Page-specific init
@@ -4344,7 +4571,118 @@
     }
 
     init();
-  </script>
+  
+    /* ══════════════════════════════════════════════════════════
+       HAMBURGER DRAWER LOGIC
+    ══════════════════════════════════════════════════════════ */
+    function toggleDrawer() {
+      const drawer = document.getElementById('ham-drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      const btn = document.getElementById('ham-btn');
+      if (drawer.classList.contains('open')) {
+        closeDrawer();
+      } else {
+        drawer.classList.add('open');
+        overlay.classList.add('visible');
+        btn.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeDrawer() {
+      document.getElementById('ham-drawer').classList.remove('open');
+      document.getElementById('drawer-overlay').classList.remove('visible');
+      const btn = document.getElementById('ham-btn');
+      if (btn) btn.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function syncDrawerAuth(isLoggedIn, user) {
+      const guestPanel = document.getElementById('drawer-auth-guest-panel');
+      const userInfo = document.getElementById('drawer-user-info');
+      const authItems = document.getElementById('drawer-auth-items');
+      if (guestPanel) guestPanel.style.display = isLoggedIn ? 'none' : 'flex';
+      if (userInfo) userInfo.style.display = isLoggedIn ? 'block' : 'none';
+      if (authItems) authItems.style.display = isLoggedIn ? 'block' : 'none';
+      if (isLoggedIn && user) {
+        const avatarEl = document.getElementById('drawer-avatar');
+        if (avatarEl) {
+          avatarEl.innerHTML = user.avatarUrl
+            ? `<img src="${user.avatarUrl}" alt="${user.username}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
+            : (user.username || 'U').slice(0, 2).toUpperCase();
+        }
+        const nameEl = document.getElementById('drawer-name');
+        const emailEl = document.getElementById('drawer-email');
+        if (nameEl) nameEl.textContent = user.fullName || user.username || '—';
+        if (emailEl) emailEl.textContent = user.email || '—';
+      }
+    }
+
+    function syncDrawerPage(name) {
+      document.querySelectorAll('#ham-drawer .drawer-item[data-drawer-page]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.drawerPage === name);
+      });
+    }
+
+</script>
+
+  <!-- Drawer Overlay -->
+  <div id="drawer-overlay" onclick="closeDrawer()"></div>
+
+  <!-- Hamburger Drawer -->
+  <div id="ham-drawer">
+    <div class="drawer-header">
+      <div class="drawer-logo">NumTest CPNS</div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+
+    <!-- Tampil saat sudah login -->
+    <div id="drawer-user-info" style="display:none">
+      <div class="drawer-user-info">
+        <div class="du-avatar" id="drawer-avatar">?</div>
+        <div>
+          <div class="du-name" id="drawer-name">—</div>
+          <div class="du-email" id="drawer-email">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tampil saat belum login -->
+    <div id="drawer-auth-guest-panel" class="drawer-auth-guest">
+      <button class="btn-drawer primary" onclick="closeDrawer(); openModal('login')">🔑 Masuk</button>
+      <button class="btn-drawer" onclick="closeDrawer(); openModal('register')">📝 Daftar Akun</button>
+    </div>
+
+    <div class="drawer-section-label">Navigasi</div>
+    <button class="drawer-item" onclick="closeDrawer(); showPage('home')" data-drawer-page="home">
+      <span class="di-icon">🏠</span> Beranda
+    </button>
+    <button class="drawer-item" onclick="closeDrawer(); showPage('simulation')" data-drawer-page="simulation">
+      <span class="di-icon">🧠</span> Simulasi
+    </button>
+    <button class="drawer-item" onclick="closeDrawer(); showPage('multiplayer')" data-drawer-page="multiplayer">
+      <span class="di-icon">⚡</span> Multiplayer
+    </button>
+    <button class="drawer-item" onclick="closeDrawer(); showPage('leaderboard')" data-drawer-page="leaderboard">
+      <span class="di-icon">🏆</span> Peringkat
+    </button>
+
+    <!-- Tampil saat sudah login -->
+    <div id="drawer-auth-items" style="display:none">
+      <div class="drawer-divider"></div>
+      <div class="drawer-section-label">Akun</div>
+      <button class="drawer-item" onclick="closeDrawer(); showPage('profile')">
+        <span class="di-icon">👤</span> Profil
+      </button>
+      <button class="drawer-item" onclick="closeDrawer(); showPage('history')">
+        <span class="di-icon">📋</span> Riwayat
+      </button>
+      <div class="drawer-footer">
+        <button class="btn-drawer-danger" onclick="closeDrawer(); handleLogout()">🚪 Keluar</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
